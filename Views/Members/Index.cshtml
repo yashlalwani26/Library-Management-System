@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Web_Application.Models.Member>
+
+@{
+    ViewBag.Title = "Members List";
+}
+
+<h2>Members List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var member in Model)
+        {
+            <tr>
+                <td>@member.Name</td>
+                <td>@member.Email</td>
+                <td>
+                    <a href="/Members/Edit/@member.MemberId" class="btn btn-warning">Edit</a>
+                    <a href="/Members/Delete/@member.MemberId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/Members/Create" class="btn btn-primary">Add New Member</a>

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Web_Application.Models.Book>
+
+@{
+    ViewBag.Title = "Books List";
+}
+
+
+<h2>Books List</h2>
+
+<a href="/Books/Create" class="btn btn-primary">Add New Book</a>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Availability</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.ISBN</td>
+                <td>@(book.IsAvailable ? "Available" : "Not Available")</td>
+                <td>
+                    <a href="/Books/Edit/@book.BookId" class="btn btn-warning">Edit</a>
+                    <a href="/Books/Delete/@book.BookId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

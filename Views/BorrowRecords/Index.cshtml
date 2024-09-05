@@ -1,0 +1,41 @@
+﻿
+@model IEnumerable<Web_Application.Models.BorrowRecord>
+
+@{
+    ViewBag.Title = "Borrow Records";
+}
+
+<h2>Borrow Records</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Book Title</th>
+            <th>Member Name</th>
+            <th>Borrow Date</th>
+            <th>Return Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var record in Model)
+        {
+            <tr>
+                <td>@record.Book.Title</td> <!-- Assuming Book is a navigation property -->
+                <td>@record.Member.Name</td> <!-- Assuming Member is a navigation property -->
+                <td>@record.BorrowDate.ToShortDateString()</td>
+                <td>
+                    @(record.ReturnDate.HasValue 
+                        ? record.ReturnDate.Value.ToShortDateString() 
+                        : "Not Returned")
+                </td>
+                <td>
+                    <a href="/BorrowRecords/Edit/@record.BorrowRecordId" class="btn btn-warning">Edit</a>
+                    <a href="/BorrowRecords/Delete/@record.BorrowRecordId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/BorrowRecords/Create" class="btn btn-primary">Add New Borrow Record</a>
